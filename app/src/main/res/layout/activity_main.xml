@@ -26,13 +26,24 @@
             android:hint="Enter item price here"
             android:inputType="numberDecimal" />
 
+        <CheckBox
+            android:id="@+id/isTaxable"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_alignTop="@+id/priceInput"
+            android:layout_toLeftOf="@+id/priceInput"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@+id/priceInput"
+            android:text="Taxable" />
+
         <ImageView
             android:id="@+id/addButton"
             android:layout_width="40sp"
             android:layout_height="40sp"
             android:layout_alignTop="@+id/priceInput"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/isTaxable"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/isTaxable"
             android:src="@drawable/add_price" />
 
         <TextView
@@ -46,14 +57,17 @@
             android:text="Total Price incl. Tax:"
             android:textSize="20sp" />
 
-        <CheckBox
-            android:id="@+id/isTaxable"
+
+
+        <TextView
+            android:id="@+id/totalPrice"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_alignTop="@+id/priceInput"
-            android:layout_marginStart="5dp"
-            android:layout_toEndOf="@+id/priceInput"
-            android:text="Taxable" />
+            android:layout_height="wrap_content"
+            android:text="$Total Price"
+            android:textSize="20sp"
+            android:layout_alignTop="@+id/totalPriceLabel"
+            android:layout_toEndOf="@+id/totalPriceLabel"
+            android:layout_marginStart="10dp"/>
 
     </RelativeLayout>
 
