@@ -85,9 +85,10 @@ public class MainActivity extends AppCompatActivity {
        return format.format(value);
     }
     public void calcPrice(){
-        if(priceInput == null || priceInput.getText() == null)
+        String input = priceInput.getText().toString();
+        if(input == null || input.length() == 0)
             return;
-        double price = Double.parseDouble(priceInput.getText().toString());
+        double price = Double.parseDouble(input);
         priceInput.setText("");
 
         if(isTaxable.isChecked()){
