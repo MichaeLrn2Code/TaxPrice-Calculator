@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
         double priceDouble = Double.parseDouble(price);
         total += priceDouble;
-        totalPrice.setText("Total Price: $" + formatTOPrice(total));
+        totalPrice.setText("$" + formatTOPrice(total));
 
         itemList.add(price);
         pricelist.setAdapter(adapter);
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public static void removeItemsFromList(int index){
         total -= Double.parseDouble(itemList.get(index));
-        totalPrice.setText(formatTOPrice(total));
+        totalPrice.setText("$" + formatTOPrice(total));
 
         itemList.remove(index);
         pricelist.setAdapter(adapter);
