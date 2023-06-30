@@ -3,7 +3,9 @@ package taxpricecalculator.main;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -47,7 +49,18 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
-
+        if(priceInput != null){
+            priceInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                @Override
+                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                    if(actionId == EditorInfo.IME_ACTION_DONE || event.getKeyCode() == KeyEvent.KEYCODE_ENTER){
+                        calcPrice();
+                        return true;
+                    }
+                    return false;
+                }
+            });
+        }
     }
 
     private void setValues(){
