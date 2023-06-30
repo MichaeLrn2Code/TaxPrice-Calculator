@@ -24,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
     private ImageView addButton;
     private TextView totalPrice;
     private ListView pricelist;
-    private ArrayAdapter<StoreItem> adapter;
-    private ArrayList<StoreItem> itemList;
+    private static ListViewAdapter adapter;
+    private static ArrayList<String> itemList;
     private double total;
     private static final double TAX = 1.13;
 
@@ -58,15 +58,17 @@ public class MainActivity extends AppCompatActivity {
         pricelist = findViewById(R.id.pricelist);
 
         itemList = new ArrayList<>();
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, itemList);
+        adapter = new ListViewAdapter(getApplicationContext(), itemList);
         pricelist.setAdapter(adapter);
     }
 
-    private void addItemsToList(double price){
-        itemList.add(new StoreItem(price));
+    public static void addItemsToList(String price){
+        itemList.add(price);
         adapter.notifyDataSetChanged();
     }
-    private void removeItemsFromList(){
+    public static void removeItemsFromList(int index){
+        itemList.remove(index);
+        adapter.notifyDataSetChanged();
 
     }
 
@@ -76,11 +78,12 @@ public class MainActivity extends AppCompatActivity {
             price *= TAX;
         }
 
-        addItemsToList(price);
-
         total += price;
         DecimalFormat format = new DecimalFormat("#.##");
         String formattedTotal = format.format(total);
+
+        addItemsToList(formattedTotal);
+
         totalPrice.setText("Total Price: $" + formattedTotal);
 
 
