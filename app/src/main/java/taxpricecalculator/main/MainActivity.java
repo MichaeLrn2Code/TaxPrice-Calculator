@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         pricelist = findViewById(R.id.pricelist);
 
         itemList = new ArrayList<>();
-        adapter = new ListViewAdapter(getApplicationContext(), itemList);
+        adapter = new ListViewAdapter(this, itemList);
         pricelist.setAdapter(adapter);
     }
 
@@ -73,7 +73,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void calcPrice(){
+        if(priceInput == null || priceInput.getText() == null)
+            return;
         double price = Double.parseDouble(priceInput.getText().toString());
+        priceInput.setText("");
+        
         if(isTaxable.isChecked()){
             price *= TAX;
         }
@@ -82,8 +86,7 @@ public class MainActivity extends AppCompatActivity {
         DecimalFormat format = new DecimalFormat("#.##");
         String formattedTotal = format.format(total);
 
-        addItemsToList(formattedTotal);
-
+        addItemsToList(format.format((price)));
         totalPrice.setText("Total Price: $" + formattedTotal);
 
 
