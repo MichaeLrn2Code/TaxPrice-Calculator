@@ -45,13 +45,13 @@ public class ListViewAdapter extends ArrayAdapter<String> {
             copy.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    MainActivity.addItemsToList(name.getText().toString());
+                    MainActivity.addItemsToList(list.get(position));
                 }
             });
             remove.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MainActivity.removeItemsFromList(Integer.parseInt(list.get(position)));
+                    MainActivity.removeItemsFromList(position);
                 }
             });
 

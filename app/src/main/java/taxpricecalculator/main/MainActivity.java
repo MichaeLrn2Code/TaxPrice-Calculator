@@ -22,11 +22,11 @@ public class MainActivity extends AppCompatActivity {
     private EditText priceInput;
     private CheckBox isTaxable;
     private ImageView addButton;
-    private TextView totalPrice;
+    private static TextView totalPrice;
     private static ListView pricelist;
     private static ListViewAdapter adapter;
     private static ArrayList<String> itemList;
-    private double total;
+    private static double total;
     private static final double TAX = 1.13;
 
 
@@ -63,17 +63,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static void addItemsToList(String price){
+
+        double priceDouble = Double.parseDouble(price);
+        total += priceDouble;
+        totalPrice.setText("Total Price: $" + formatTOPrice(total));
+
         itemList.add(price);
         pricelist.setAdapter(adapter);
 
     }
     public static void removeItemsFromList(int index){
+        total -= Double.parseDouble(itemList.get(index));
+        totalPrice.setText(formatTOPrice(total));
+
         itemList.remove(index);
         pricelist.setAdapter(adapter);
 
     }
-
-    private void calcPrice(){
+    private static String formatTOPrice(Double value){
+        DecimalFormat format = new DecimalFormat("#.##");
+       return format.format(value);
+    }
+    public void calcPrice(){
         if(priceInput == null || priceInput.getText() == null)
             return;
         double price = Double.parseDouble(priceInput.getText().toString());
@@ -83,12 +94,9 @@ public class MainActivity extends AppCompatActivity {
             price *= TAX;
         }
 
-        total += price;
-        DecimalFormat format = new DecimalFormat("#.##");
-        String formattedTotal = format.format(total);
+        addItemsToList(formatTOPrice(price));
 
-        addItemsToList(format.format((price)));
-        totalPrice.setText("Total Price: $" + formattedTotal);
+
 
 
     }
