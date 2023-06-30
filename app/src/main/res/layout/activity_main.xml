@@ -46,18 +46,17 @@
             android:layout_toEndOf="@+id/isTaxable"
             android:src="@drawable/add_price" />
 
+
         <TextView
             android:id="@+id/totalPriceLabel"
             android:layout_width="184dp"
             android:layout_height="30dp"
             android:layout_below="@+id/priceInput"
             android:layout_alignStart="@+id/priceInput"
-            android:layout_marginStart="3dp"
+            android:layout_marginStart="-8dp"
             android:layout_marginTop="25dp"
             android:text="Total Price incl. Tax:"
             android:textSize="20sp" />
-
-
 
         <TextView
             android:id="@+id/totalPrice"
