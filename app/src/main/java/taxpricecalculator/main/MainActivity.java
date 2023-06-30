@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private CheckBox isTaxable;
     private ImageView addButton;
     private TextView totalPrice;
-    private ListView pricelist;
+    private static ListView pricelist;
     private static ListViewAdapter adapter;
     private static ArrayList<String> itemList;
     private double total;
@@ -64,11 +64,12 @@ public class MainActivity extends AppCompatActivity {
 
     public static void addItemsToList(String price){
         itemList.add(price);
-        adapter.notifyDataSetChanged();
+        pricelist.setAdapter(adapter);
+
     }
     public static void removeItemsFromList(int index){
         itemList.remove(index);
-        adapter.notifyDataSetChanged();
+        pricelist.setAdapter(adapter);
 
     }
 
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         double price = Double.parseDouble(priceInput.getText().toString());
         priceInput.setText("");
-        
+
         if(isTaxable.isChecked()){
             price *= TAX;
         }
