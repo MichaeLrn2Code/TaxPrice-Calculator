@@ -1,5 +1,7 @@
 package taxpricecalculator.main;
 
+import androidx.annotation.NonNull;
+
 public class StoreItem {
     private double price;
 
@@ -13,5 +15,11 @@ public class StoreItem {
 
     public void setPrice(double price){
         this.price = price;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return String.format("%.2f", price);
     }
 }

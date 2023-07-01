@@ -3,15 +3,19 @@ package taxpricecalculator.main;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import taxpricecalculator.main.databinding.ActivityMainBinding;
+import taxpricecalculator.main.databinding.ListrowBinding;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,9 +27,13 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView.Adapter myAdapter;
 
+    EditText inputPrice;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        inputPrice = binding.priceInput;
 
         listModel = new ViewModelProvider(this).get(ListItemViewModel.class);
         listItems = listModel.items.getValue();
@@ -37,29 +45,42 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        binding.addButton.setOnClickListener(clk->{
+            listItems.add(new StoreItem(Double.parseDouble(inputPrice.getText().toString())));
+            myAdapter.notifyItemInserted(listItems.size()-1);
+            inputPrice.setText("");
+        });
+
+
         binding.priceListView.setAdapter(myAdapter = new RecyclerView.Adapter<RowHolder>() {
 
             @NonNull
             @Override
             public RowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                return null;
+                ListrowBinding bindingList = ListrowBinding.inflate(getLayoutInflater(),parent,false);
+                return new RowHolder(bindingList.getRoot());
             }
 
             @Override
             public void onBindViewHolder(@NonNull RowHolder holder, int position) {
-
+                StoreItem obj = listItems.get(position);
+                holder.itemPrice.setText(obj.toString());
             }
 
             @Override
             public int getItemCount() {
-                return 0;
+                return listItems.size();
             }
         });
+
+        binding.priceListView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     public class RowHolder extends RecyclerView.ViewHolder{
+        TextView itemPrice;
         public RowHolder(@NonNull View itemView){
             super(itemView);
+            itemPrice = itemView.findViewById(R.id.price);
 
         }
     }
