@@ -33,8 +33,8 @@ public class ListViewAdapter extends ArrayAdapter<String> {
             LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.list_row, null);
 
-            TextView number = convertView.findViewById(R.id.number);
-            number.setText(position + 1 + ".");
+//            TextView number = convertView.findViewById(R.id.number);
+//            number.setText(position + 1 + ".");
 
             TextView name = convertView.findViewById(R.id.name);
             name.setText(list.get(position));
