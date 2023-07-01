@@ -32,9 +32,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        inputPrice = binding.priceInput;
-
         listModel = new ViewModelProvider(this).get(ListItemViewModel.class);
         listItems = listModel.items.getValue();
 
@@ -44,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        inputPrice = binding.priceInput;
 
         binding.addButton.setOnClickListener(clk->{
             listItems.add(new StoreItem(Double.parseDouble(inputPrice.getText().toString())));
@@ -57,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             @NonNull
             @Override
             public RowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                ListrowBinding bindingList = ListrowBinding.inflate(getLayoutInflater(),parent,false);
+                ListrowBinding bindingList = ListrowBinding.inflate(getLayoutInflater());
                 return new RowHolder(bindingList.getRoot());
             }
 
