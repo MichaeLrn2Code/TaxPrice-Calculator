@@ -12,16 +12,17 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:background="#F1FEFF"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
             android:id="@+id/priceInput"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="208dp"
+            android:layout_height="56dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:ems="10"
             android:hint="Enter item price here"
             android:inputType="numberDecimal"
@@ -30,25 +31,23 @@
 
         <CheckBox
             android:id="@+id/isTaxable"
-            android:layout_width="85dp"
-            android:layout_height="55dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="4dp"
-            android:text="Taxable"
-            app:layout_constraintBottom_toBottomOf="@+id/priceInput"
+            android:layout_width="67dp"
+            android:layout_height="48dp"
+            android:text="Tax"
+            app:layout_constraintBaseline_toBaselineOf="@+id/priceInput"
             app:layout_constraintEnd_toStartOf="@+id/addButton" />
 
         <ImageView
             android:id="@+id/addButton"
-            android:layout_width="40sp"
-            android:layout_height="40sp"
+            android:layout_width="60dp"
+            android:layout_height="47dp"
             android:layout_alignTop="@+id/priceInput"
-            android:layout_marginTop="36dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginBottom="4dp"
             android:layout_toEndOf="@+id/isTaxable"
             android:src="@drawable/add_price"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toBottomOf="@+id/priceInput"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/totalPriceLabel"
@@ -56,25 +55,34 @@
             android:layout_height="30dp"
             android:layout_below="@+id/priceInput"
             android:layout_alignStart="@+id/priceInput"
-            android:layout_marginStart="44dp"
             android:layout_marginTop="20dp"
             android:text="Total Price incl. Tax:"
             android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/priceInput"
             app:layout_constraintTop_toBottomOf="@+id/priceInput" />
 
         <TextView
             android:id="@+id/totalPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="95dp"
+            android:layout_height="36dp"
             android:layout_alignTop="@+id/totalPriceLabel"
-            android:layout_marginEnd="52dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginStart="5dp"
             android:layout_toEndOf="@+id/totalPriceLabel"
             android:text="$Total Price"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="@+id/totalPriceLabel"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintBaseline_toBaselineOf="@+id/totalPriceLabel"
+            app:layout_constraintStart_toEndOf="@+id/totalPriceLabel" />
+
+        <ImageView
+            android:id="@+id/clearList"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/clear_list"
+            app:layout_constraintBottom_toBottomOf="@+id/totalPrice"
             app:layout_constraintEnd_toEndOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView

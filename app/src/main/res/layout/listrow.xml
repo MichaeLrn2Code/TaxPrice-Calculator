@@ -11,10 +11,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@id/price"
+        android:layout_marginStart="10dp"
         android:text="Number"
         android:textColor="#09A1D8"
+        android:textSize="25sp"
         android:textStyle="bold"
-        android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,33 +23,30 @@
         android:id="@+id/price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="40dp"
         android:text="Price"
         android:textColor="#000"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="@+id/number"
-        app:layout_constraintStart_toStartOf="@+id/number" />
+        android:textSize="25sp"
+        app:layout_constraintStart_toEndOf="@+id/number"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/copy"
         android:layout_width="30sp"
         android:layout_height="30sp"
-        android:layout_marginStart="250dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginEnd="60dp"
         android:src="@drawable/duplicate"
-        app:layout_constraintBottom_toBottomOf="@+id/price"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/number"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_goneMarginStart="100dp" />
 
     <ImageView
         android:id="@+id/remove"
         android:layout_width="30sp"
         android:layout_height="30sp"
-        android:layout_marginEnd="15dp"
+        android:layout_marginEnd="10dp"
         android:src="@drawable/remove"
-        app:layout_constraintBottom_toBottomOf="@+id/copy"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.96"
-        app:layout_constraintStart_toEndOf="@+id/copy" />
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
