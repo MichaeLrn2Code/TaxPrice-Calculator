@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import taxpricecalculator.main.databinding.ActivityMainBinding;
@@ -29,11 +30,18 @@ public class MainActivity extends AppCompatActivity {
 
     ListItemViewModel listModel;
 
+    RecyclerView priceListView;
+
+    private double total;
+
     private RecyclerView.Adapter myAdapter;
 
     EditText inputPrice;
 
     CheckBox isTaxable;
+
+    TextView totalPrice;
+
 
     private static final double TAX = 1.13;
 
@@ -52,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         inputPrice = binding.priceInput;
         isTaxable = binding.isTaxable;
+        priceListView = binding.priceListView;
+        totalPrice = binding.totalPrice;
 
         binding.addButton.setOnClickListener(clk->{
             String price = inputPrice.getText().toString();
@@ -60,15 +70,16 @@ public class MainActivity extends AppCompatActivity {
             }else{
                 if (isTaxable.isChecked()){
                 double taxedPrice = Double.parseDouble(price)*TAX;
-                    listItems.add(new StoreItem(taxedPrice));
+                    addItem(new StoreItem(taxedPrice));
                 }else {
-                listItems.add(new StoreItem(Double.parseDouble(price)));}
-                myAdapter.notifyItemInserted(listItems.size()-1);
+                addItem(new StoreItem(Double.parseDouble(price)));}
+//                myAdapter.notifyItemInserted(listItems.size()-1);
                 inputPrice.setText("");
             }
         });
 
-        binding.priceListView.setAdapter(myAdapter = new RecyclerView.Adapter<RowHolder>() {
+
+        priceListView.setAdapter(myAdapter = new RecyclerView.Adapter<RowHolder>() {
 
             @NonNull
             @Override
@@ -81,11 +92,10 @@ public class MainActivity extends AppCompatActivity {
             public void onBindViewHolder(@NonNull RowHolder holder, int position) {
                 StoreItem obj = listItems.get(position);
                 holder.itemPrice.setText(obj.toString());
-
-//                holder.itemView.findViewById(R.id.remove).setOnClickListener(view->{
-//                    listItems.remove(position);
-//                    myAdapter.notifyItemRemoved(position);
-//                });
+                holder.rowNum.setText(position+1 +": ");
+                holder.itemView.findViewById(R.id.remove).setOnClickListener(view->{
+                    removeItem(position);
+                });
             }
 
             @Override
@@ -99,12 +109,36 @@ public class MainActivity extends AppCompatActivity {
 
     public class RowHolder extends RecyclerView.ViewHolder{
         TextView itemPrice;
+        TextView rowNum;
         public RowHolder(@NonNull View itemView){
             super(itemView);
             itemPrice = itemView.findViewById(R.id.price);
+            rowNum = itemView.findViewById(R.id.number);
 
         }
     }
+
+    public void addItem(StoreItem item){
+        listItems.add(item);
+        double priceDouble = item.getPrice();
+        total += priceDouble;
+        totalPrice.setText("$" + formatTOPrice(total));
+        myAdapter.notifyItemInserted(listItems.size()-1);
+    }
+
+    private String formatTOPrice(Double value){
+        DecimalFormat format = new DecimalFormat("#.##");
+        return format.format(value);
+    }
+
+    public void removeItem(int index){
+        total -= listItems.get(index).getPrice();
+        totalPrice.setText("$" + formatTOPrice(total));
+        listItems.remove(index);
+        myAdapter.notifyDataSetChanged();
+
+    }
+
     Toast t;
     private void makeToast(String str){
         if(t != null)t.cancel();
