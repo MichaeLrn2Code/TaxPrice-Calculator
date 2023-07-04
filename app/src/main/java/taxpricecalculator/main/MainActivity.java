@@ -111,15 +111,15 @@ public class MainActivity extends AppCompatActivity {
                 holder.rowNum.setText(position+1 +": ");
 
                 // On Click listener for copy icon to duplicate list item
-                holder.itemView.findViewById(R.id.copy).setOnClickListener(view->{
-                    addItem(listItems.get(position));
-                });
+//                holder.itemView.findViewById(R.id.copy).setOnClickListener(view->{
+//                    addItem(listItems.get(position));
+//                });
 
 
                 // On click Listener for remove icon to remove the list item when user click the remove button on specific row
-                holder.itemView.findViewById(R.id.remove).setOnClickListener(view->{
-                    removeItem(position);
-                });
+//                holder.itemView.findViewById(R.id.remove).setOnClickListener(view->{
+//                    removeItem(position);
+//                });
             }
 
             @Override
@@ -140,6 +140,18 @@ public class MainActivity extends AppCompatActivity {
             super(itemView);
             itemPrice = itemView.findViewById(R.id.price);
             rowNum = itemView.findViewById(R.id.number);
+
+            // On Click listener for copy icon to duplicate list item
+            itemView.findViewById(R.id.copy).setOnClickListener(click->{
+                int rowToCopy = getAbsoluteAdapterPosition();
+                addItem(listItems.get(rowToCopy));
+            });
+
+            // On click Listener for remove icon to remove the list item when user click the remove button on specific row
+            itemView.findViewById(R.id.remove).setOnClickListener(click->{
+                int rowToDelete = getAbsoluteAdapterPosition();
+                removeItem(rowToDelete);
+            });
 
         }
     }
